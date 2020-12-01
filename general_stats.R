@@ -24,7 +24,7 @@ while (i < 99){
 barplot(means, 
         main="100 samples of 500",
         ylab = "Mean",
-        col=ifelse(means < mean(d)-0.1 | means > mean(d)+0.1, "steelblue", "lightblue"),
+        col=ifelse(means < mean(d)-0.05 | means > mean(d)+0.05, "steelblue", "lightblue"),
         border = "lightblue")
 
 barplot(sort(means), 
