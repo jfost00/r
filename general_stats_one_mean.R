@@ -17,3 +17,6 @@ lapply(d, plot, pch=20, col="steelblue", ylab="Value")
 
 # plot the probability mean for each 
 lapply(d, mean_prob)
+
+# plot the probability variance for each 
+lapply(d, var_prob)

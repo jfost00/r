@@ -38,3 +38,21 @@ mean_prob = function(x){
           ylab = "Probability",
           col = "steelblue")
 }
+
+# variance
+var_prob = function(x){
+  s = 500
+  i = 0
+  vars = var(sample(x, s, replace = TRUE))
+  while (i < 99){
+    vars = c(vars, var(sample(x, s, replace = TRUE)))
+    i = i + 1
+  }
+  v = summary(as.factor(round(vars, 1)))
+  v = v / sum(v)
+  barplot(v, ylim = c(0, max(v) + 0.15),
+          main = "",
+          xlab = "Variance",
+          ylab = "Probability",
+          col = "steelblue")
+}
