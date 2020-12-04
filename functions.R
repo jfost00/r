@@ -5,6 +5,9 @@ gdata = function(){
   l$x1 = runif(4000, min = 0, max = 4)
   l$x2 = rpois(4000, lambda = 3)
   l$x3 = rbinom(4000, size=3, prob = .2)
+  d = c(rnorm(2000, mean = 1, sd = 2), rnorm(2000, mean = 10, sd = 2))
+  d = d[d>0]
+  l$x4 = d
   return(l)
 }
 
@@ -17,42 +20,45 @@ gstats = function(x){
   l$med = lapply(x, median)
   l$stdev = lapply(x, sd)
   l$t = lapply(x, t.test)
-  l$h = lapply(x, hist, col = "steelblue", xlab = "", main = "")
+  l$h = lapply(x, hist, plot=FALSE)
   return(l)
 }
 
-# mean probability for each sample
-mean_prob = function(x){
+# mean and variance 
+mv_prob = function(x){
   s = 500
   i = 0
   means = mean(sample(x, s, replace = TRUE))
+  vars = var(sample(x, s, replace = TRUE))
   while (i < 99){
     means = c(means, mean(sample(x, s, replace = TRUE)))
+    vars = c(vars, var(sample(x, s, replace = TRUE)))
     i = i + 1
   }
   m = summary(as.factor(round(means, 1)))
+  v = summary(as.factor(round(vars, 1)))
   m = m / sum(m)
+  v = v / sum(v)
+  
   barplot(m, ylim = c(0, max(m) + 0.15),
           main = "",
           xlab = "Mean",
           ylab = "Probability",
           col = "steelblue")
-}
-
-# variance
-var_prob = function(x){
-  s = 500
-  i = 0
-  vars = var(sample(x, s, replace = TRUE))
-  while (i < 99){
-    vars = c(vars, var(sample(x, s, replace = TRUE)))
-    i = i + 1
-  }
-  v = summary(as.factor(round(vars, 1)))
-  v = v / sum(v)
+  
   barplot(v, ylim = c(0, max(v) + 0.15),
           main = "",
           xlab = "Variance",
           ylab = "Probability",
           col = "steelblue")
+  
+  # return means and vars
+}
+
+# foundation plots 
+fplots = function(x){
+  par(mfrow=c(2,2))
+  plot(x, pch=20, col="steelblue", ylab="Value")
+  hist(x, col = "steelblue", xlab = "Value", main = "")
+  mv_prob(x)
 }
