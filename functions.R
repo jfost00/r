@@ -14,13 +14,13 @@ gdata = function(){
 # general stats
 gstats = function(x){
   l = list()
-  l$s = lapply(x, summary)
-  l$r = lapply(x, range)
-  l$m = lapply(x, mean)
-  l$med = lapply(x, median)
-  l$stdev = lapply(x, sd)
-  l$t = lapply(x, t.test)
-  l$h = lapply(x, hist, plot=FALSE)
+  l$s = summary(x)
+  l$r = range(x)
+  l$m = mean(x)
+  l$med = median(x)
+  l$stdev = sd(x)
+  l$t = t.test(x)
+  l$h = hist(x, plot=FALSE)
   return(l)
 }
 

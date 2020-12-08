@@ -7,7 +7,7 @@ set.seed(100)
 d = gdata()
 
 # create a list of stats for each dataset
-dstats = gstats(d)
+dstats = lapply(d, gstats)
 
 # plot each dataset
 lapply(d, fplots)
