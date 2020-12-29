@@ -15,11 +15,11 @@ plot(x, pch = 20, col = c)
 
 
 # two dimensions
-x = rnorm(1000)
+x = rnorm(4000)
 gstats(x)
 #fplots(x)
 
-y = rnorm(1000)
+y = rnorm(4000)
 gstats(y)
 #fplots(y)
 
@@ -30,3 +30,25 @@ plot(x, y, pch=20, col=c)
 
 
 
+# Varying levels of assurance 
+# More assurance = less observations
+# Use math to find assurance 
+
+par(mfcol=c(2,2), ann = FALSE)
+#title(main = )
+
+high = 3
+c = ifelse(sqrt(x**2 + y**2) > high, "red", "steelblue")
+plot(x, y, pch=20, col=c)
+
+med_high = 2.5
+c = ifelse(sqrt(x**2 + y**2) > med_high, "red", "steelblue")
+plot(x, y, pch=20, col=c)
+
+med = 2
+c = ifelse(sqrt(x**2 + y**2) > med, "red", "steelblue")
+plot(x, y, pch=20, col=c)
+
+low = 1.5
+c = ifelse(sqrt(x**2 + y**2) > low, "red", "steelblue")
+plot(x, y, pch=20, col=c)
