@@ -23,6 +23,7 @@ y = rnorm(4000)
 gstats(y)
 #fplots(y)
 
+
 f = mean(c(sd(x) * 3 + mean(x), sd(y) * 3 + mean(y)))
 c = ifelse(sqrt(x**2 + y**2) > f, "red", "steelblue")
 
@@ -33,22 +34,19 @@ plot(x, y, pch=20, col=c)
 # Varying levels of assurance 
 # More assurance = less observations
 # Use math to find assurance 
+x = rnorm(100)
+y = rnorm(100)
+a = seq(from = 1, to = 3, by = 0.1)
 
-par(mfcol=c(2,2), ann = FALSE)
-#title(main = )
+risk = function(x, y, a){
+  m = lapply(a, function(a){sqrt(x**2 + y**2) > a})
+  lapply(m, function(m){
+    c = ifelse(m, "red", "steelblue")
+    plot(x, y, pch=20, col = c)
+  })
+}
 
-high = 3
-c = ifelse(sqrt(x**2 + y**2) > high, "red", "steelblue")
-plot(x, y, pch=20, col=c)
+par(mfcol=c(2,2))
+risk(x,y,a)
 
-med_high = 2.5
-c = ifelse(sqrt(x**2 + y**2) > med_high, "red", "steelblue")
-plot(x, y, pch=20, col=c)
 
-med = 2
-c = ifelse(sqrt(x**2 + y**2) > med, "red", "steelblue")
-plot(x, y, pch=20, col=c)
-
-low = 1.5
-c = ifelse(sqrt(x**2 + y**2) > low, "red", "steelblue")
-plot(x, y, pch=20, col=c)
